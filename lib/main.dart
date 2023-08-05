@@ -1,3 +1,5 @@
+import 'package:e_umkm_mobile/users/fragments/dashboard_of_fragments.dart';
+import 'package:e_umkm_mobile/users/userPreferences/user_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:e_umkm_mobile/users/authentication/login_screen.dart';
@@ -20,8 +22,14 @@ class MyApp extends StatelessWidget {
           //  primarySwatch: Colors.red,
           ),
       home: FutureBuilder(
+        future: RememberUserPrefs.readUserInfo(),
         builder: (context, dataSnapShot) {
-          return LoginScreen();
+          if(dataSnapShot.data == null){
+            return LoginScreen();
+          }
+          else{
+            return DashboardOfFragments();
+          }
         },
       ),
     );
